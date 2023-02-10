@@ -12,6 +12,19 @@ const userSchema = new mongoose.Schema(
         unique: true,
         trimp: true,
        },
+       picture: {
+        type: String,
+        default: '',
+       },
+       coins: {
+        type: Number,
+        required: true,
+        default: 100
+       },
+       bio: {
+        type: String,
+        maxlength: 1024,
+       },
        email: {
         type: String,
         required: true,
@@ -26,14 +39,6 @@ const userSchema = new mongoose.Schema(
         minlength: 6,
         maxlength: 1024,
        },
-       picture: {
-        type: String,
-        default: '',
-       },
-       bio: {
-        type: String,
-        maxlength: 1024,
-       }
     },
     {
         timestamps: true,
