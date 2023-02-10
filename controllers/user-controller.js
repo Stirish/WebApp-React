@@ -1,7 +1,6 @@
 const UserModel = require('../models/user-model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
-// Create User
 module.exports.signUp = async (req, res) => {
     const {pseudo, email, password} = req.body;
 
@@ -14,8 +13,17 @@ module.exports.signUp = async (req, res) => {
     }
 };
 
-// Read All Users
 module.exports.getAllUsers = async (req, res) => {
-    const users = await UserModel.find().select(['-password', '-email']);
+    const users = await UserModel.find().select(['-_id', '-password', '-email']);
     res.status(200).json(users);
+};
+
+module.exports.getOneUser = async (req, res) => {
+    if(!ObjectID.isValid(req.params.id))
+        return res.status(400).send('ID unknown: ' + req.params.id);
+
+    UserModel.findById(req.params.id, (err, docs) => {
+        if(!err) res.send(docs);
+        else console.log('ID unknown: ' + err);
+    }).select(['-_id', '-password', '-email']);
 };
