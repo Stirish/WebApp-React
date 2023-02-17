@@ -18,7 +18,7 @@ module.exports.uploadProfil = async (req, res) => {
 
     } catch (err) {
         const errors = uploadErrors(err);
-        return res.status(400).send({errors});
+        return res.status(200).send({errors});
     }
 
     const fileName = req.body.name + '.jpg';
